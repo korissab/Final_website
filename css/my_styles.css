@@ -1,0 +1,100 @@
+.my_serif_text {
+    font-family: serif;
+}
+
+.my_special_color {
+    color: rgb(240, 7, 182) !important;
+
+}
+a{
+    color: plum !important
+}
+
+.my_background_color {
+    background-color: rgb(5, 29, 66) !important
+}
+
+.my_text_color {
+    color:rgb(224, 157, 207) !important
+}
+
+.text_style {
+    font-size: 3px;
+}
+
+.backdrop_color{
+    background-color:rgb(147, 189, 234)!important
+}
+
+.heading_font {
+    font-size: x-large;
+    color: rgb(78, 3, 133);
+}
+.heading_2{
+    font-size:large;
+    color: rgb(100, 0, 101);
+}
+.heading_3{
+    font-size:medium;
+    color: rgb(9, 146, 39);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+.common_div{
+    background-color: dodgerblue;
+    border: 2px solid;
+    position: absolute;
+    overflow: auto;
+    padding: 2px;
+    text-align: center;
+
+}
+
+.header_div{
+top: 5px;
+left: 5px;
+right: 5px;
+height:  100px;
+text-align: center;
+line-height: 100px;
+font-size: 35px;
+
+}
+
+.left_div {
+    top: 460px;
+    left: 5px;
+    width: 400px;
+    bottom: 180px;
+}
+
+.right_div{
+    top: 5px;
+    right: 5px;
+    width: 350px;
+    bottom: 550px;
+}
+
+.main_div{
+    top: 114px;
+    left: 114px;
+    right: 114px;
+    bottom:114px;
+    
+}
+
+.footer {
+    bottom: 5px;
+    height: 100px;
+    left: 5px;
+    right: 5px; 
+
+}
+.right_divv{
+    top: 200px;
+    right: 5px;
+    width: 350px;
+    bottom: 300px;
+}

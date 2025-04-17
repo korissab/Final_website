@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wordle Clone</title>
+  <style>
+    body 
+    
+    {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      background: #121213;
+      color: white;
+    }
+    h1 {
+      color: #ffffff;
+    }
+    .board {
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+    }
+    .tile {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #3a3a3c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      background-color: #121213;
+      color: white;
+    }
+    .correct {
+      background-color: #538d4e;
+      border-color: #538d4e;
+    }
+    .present {
+      background-color: #b59f3b;
+      border-color: #b59f3b;
+    }
+    .absent {
+      background-color: #3a3a3c;
+      border-color: #3a3a3c;
+    }
+    input[type="text"] {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1.2rem;
+      width: 150px;
+      text-transform: uppercase;
+    }
+    button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+    <a
+    href="../from_scratch/my_index.html">Back to Home!!
+ 
+
+    </a>
+  <h1>Wordle Clone</h1>
+  <div class="board" id="board"></div>
+  <div>
+    <input type="text" id="guessInput" maxlength="5" autofocus />
+    <button onclick="submitGuess()">Guess</button>
+  </div>
+  <script>
+    const solution = "CRANE"; // You can change this word
+    const board = document.getElementById("board");
+    let currentRow = 0;
+
+    // Create 6 rows of 5 tiles
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement("div");
+      row.className = "row";
+      for (let j = 0; j < 5; j++) {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        row.appendChild(tile);
+      }
+      board.appendChild(row);
+    }
+
+    function submitGuess() {
+      const input = document.getElementById("guessInput");
+      const guess = input.value.toUpperCase();
+
+      if (guess.length !== 5) {
+        alert("Please enter a 5-letter word.");
+        return;
+      }
+
+      if (currentRow >= 6) {
+        alert("Game over! Refresh to play again.");
+        return;
+      }
+
+      const rowTiles = board.children[currentRow].children;
+      const solutionArray = solution.split("");
+      const guessArray = guess.split("");
+
+      // First pass - mark correct letters
+      let letterUsed = Array(5).fill(false);
+      for (let i = 0; i < 5; i++) {
+        rowTiles[i].textContent = guessArray[i];
+        if (guessArray[i] === solutionArray[i]) {
+          rowTiles[i].classList.add("correct");
+          letterUsed[i] = true;
+          guessArray[i] = null; // Don't double count
+        }
+      }
+
+      // Second pass - mark present and absent
+      for (let i = 0; i < 5; i++) {
+        if (!rowTiles[i].classList.contains("correct")) {
+          let found = false;
+          for (let j = 0; j < 5; j++) {
+            if (!letterUsed[j] && guessArray[i] === solutionArray[j]) {
+              found = true;
+              letterUsed[j] = true;
+              break;
+            }
+          }
+          rowTiles[i].classList.add(found ? "present" : "absent");
+        }
+      }
+
+      if (guess === solution) {
+        setTimeout(() => alert("Congratulations! You guessed it!"), 100);
+      } else if (currentRow === 5) {
+        setTimeout(() => alert(`Out of tries! The word was ${solution}`), 100);
+      }
+
+      input.value = "";
+      currentRow++;
+    }
+  </script>
+</body>
+</html>
